@@ -25,6 +25,8 @@ function App() {
     AOS.init();
   }, [])
 
+  const [products, setProducts] = useState([])
+
   
   //changing navigation btn sign for each click and reseting it on route change
    const [navState, setNavState] = useState(false)
@@ -32,50 +34,69 @@ function App() {
         setNavState(!navState)
     }
 
-    //list of products
-    const [products, setProducts] = useState([
-      {
-        id:1,
-        title:"Opna Women's Short Sleeve Moisture",
-        initialPrice: Math.round(7.95),
-        price:Math.round(7.95),
-        description:"100% Polyester, Machine wash, 100% cationic polyester interlock, Machine Wash & Pre Shrunk for a Great Fit, Lightweight, roomy and highly breathable with moisture wicking fabric which helps to keep moisture away, Soft Lightweight Fabric with comfortable V-neck collar and a slimmer fit, delivers a sleek, more feminine silhouette and Added Comfort",
-        rating:{rate:4.5, count:146},
-        quantity: 1
-    },
+    useEffect(() => {
+      const getProducts = async () => {
+        const response = await fetch('../../database/data.json');
+        const data = await response.json();
     
-    {
-      id:2,
-      title:"Mens Casual Premium Slim Fit T-Shirts ",
-      initialPrice: Math.round(22.3),
-      price:Math.round(22.3),
-      description:"Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
-      quantity: 1,
-      rating:{rate:4.1, count:259}
-  },
+        const modifiedData = data.map((product) => {
+          return {
+            ...product,
+            initialPrice: Math.round(product.initialPrice),
+            price: Math.round(product.price),
+          };
+        });
+    
+        setProducts(modifiedData);
+      };
+    
+      getProducts();
+    }, []);
+    
+    //list of products
+//     const [products, setProducts] = useState([
+//       {
+//         id:1,
+//         title:"Opna Women's Short Sleeve Moisture",
+//         initialPrice: Math.round(7.95),
+//         price:Math.round(7.95),
+//         description:"100% Polyester, Machine wash, 100% cationic polyester interlock, Machine Wash & Pre Shrunk for a Great Fit, Lightweight, roomy and highly breathable with moisture wicking fabric which helps to keep moisture away, Soft Lightweight Fabric with comfortable V-neck collar and a slimmer fit, delivers a sleek, more feminine silhouette and Added Comfort",
+//         rating:{rate:4.5, count:146},
+//         quantity: 1
+//     },
+    
+//     {
+//       id:2,
+//       title:"Mens Casual Premium Slim Fit T-Shirts ",
+//       initialPrice: Math.round(22.3),
+//       price:Math.round(22.3),
+//       description:"Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+//       quantity: 1,
+//       rating:{rate:4.1, count:259}
+//   },
 
-  {
-    id:3,
-    title:"Mens Cotton Jacket",
-    initialPrice: Math.round(43.6),
-    price:Math.round(43.6),
-    description:"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
-    quantity: 1,
-    "rating":{rate:4.7, count:500}
-},
+//   {
+//     id:3,
+//     title:"Mens Cotton Jacket",
+//     initialPrice: Math.round(43.6),
+//     price:Math.round(43.6),
+//     description:"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
+//     quantity: 1,
+//     "rating":{rate:4.7, count:500}
+// },
 
-{
-    id:4,
-    title:"Mens Casual Slim Fit",
-    initialPrice: Math.round(15.99),
-      price:Math.round(15.99),
-    description:"The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
-    quantity: 1,
-    rating:{rate:2.1,count:430}
-},
+// {
+//     id:4,
+//     title:"Mens Casual Slim Fit",
+//     initialPrice: Math.round(15.99),
+//       price:Math.round(15.99),
+//     description:"The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+//     quantity: 1,
+//     rating:{rate:2.1,count:430}
+// },
 
   
-    ]);
+//     ]);
 
     const [cart, setCart] = useState([])
     
