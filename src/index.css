@@ -149,7 +149,7 @@ button{
 
 .secondary-btn{
   padding: 1rem ;
-  width: 70%;
+  width: 90%;
   border-radius: 8px;
   display: block;
   margin: 1.5rem auto 1rem;
@@ -312,13 +312,17 @@ button{
   margin: 0 0 0 .3rem;
 }
 
+.products-section{
+  width: 95%;
+}
+
 .product-desc-section{
     padding-top: 4rem;
 }
 
 .product-desc-card{
   min-height: 450px;
-  width: 90%;
+  width: 100%;
   border-radius: 1rem;
   background-color: white;
   margin: 0 auto;
@@ -515,7 +519,7 @@ button{
   color: #463529;
   padding: 1rem;
   border-radius: 1rem;
-  width: 80%;
+  width: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
